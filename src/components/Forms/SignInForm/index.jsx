@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LOGIN_API} from '../../../config/defaultValues';
 import {useAuth} from '../../../contexts/authContext';
 
-const LoginForm = () => {
+const SignInForm = () => {
   const {Login} = useAuth();
   const [form, setForm] = React.useState({username: '', password: ''});
 
@@ -37,21 +37,21 @@ const LoginForm = () => {
         value={form.password}
       />
       <View style={{marginTop: 12}}>
-        <Button label="Log in" pressHandler={handleLogin} />
+        <Button label="Sign in" pressHandler={handleLogin} />
       </View>
       <WhiteText>
-        Not signed up yet ?{' '}
+        Already signed up ?{' '}
         <Link
           style={{textDecorationLine: 'underline', color: '#0e4faf'}}
-          to={'/Signin'}>
-          sign in
+          to={'/Login'}>
+          log in
         </Link>
       </WhiteText>
     </FormContainer>
   );
 };
 
-export default LoginForm;
+export default SignInForm;
 
 const FormContainer = styled.View`
   width: 70%;

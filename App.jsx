@@ -1,17 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {StatusBar} from 'react-native';
 import {Routes} from './src/config/routes';
 import {AuthProvider} from './src/contexts/authContext';
 import {ThemeProvider} from 'styled-components';
-import theme from './src/config/theme';
+import {darkTheme, lightTheme} from './src/config/theme';
 
-function App() {
+const App = () => {
+  // TODO: theme context
+  const [theme, setTheme] = useState('light');
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <StatusBar
+        animated={true}
+        barStyle={theme === 'light' ? 'light-content' : 'dark-content'}
+        backgroundColor={
+          theme === 'light' ? lightTheme.statusBar : darkTheme.statusBar
+        }
+        hidden={false}
+      />
       <AuthProvider>
         <Routes />
       </AuthProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

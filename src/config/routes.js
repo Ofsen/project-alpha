@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import styled from 'styled-components/native';
 import {useAuth} from '../contexts/authContext';
@@ -10,12 +10,21 @@ import Home from '../screens/Home';
 
 const Stack = createNativeStackNavigator();
 
+// removing the background color from the navigation container
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'transparent',
+  },
+};
+
 export const Routes = () => {
   const {logged} = useAuth();
 
   return (
     <GlobalSafeArea>
-      <NavigationContainer>
+      <NavigationContainer theme={theme}>
         <Stack.Navigator initialRouteName="Home">
           {logged ? (
             <>
@@ -36,7 +45,13 @@ export const Routes = () => {
                 name="Login"
                 component={Login}
               />
-              <Stack.Screen name="Signin" component={Signin} />
+              <Stack.Screen
+                options={{
+                  title: 'Sign In',
+                }}
+                name="Signin"
+                component={Signin}
+              />
             </>
           )}
         </Stack.Navigator>

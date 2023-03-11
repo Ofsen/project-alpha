@@ -1,18 +1,14 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 import styled from 'styled-components';
 
 const FieldContainer = styled.View`
   gap: 4px;
 `;
 
-const Label = styled.Text`
-  color: white;
-`;
-
 const Input = styled.TextInput`
-  border: 2px solid white;
-  color: #beced8;
+  border: 2px solid #353535;
+  color: black;
   padding: 8px 16px;
 `;
 
@@ -21,11 +17,11 @@ const TextField = props => {
 
   return (
     <FieldContainer>
-      <Label>{label}</Label>
+      <Text>{label}</Text>
       <Input
         placeholder={placeholder}
         value={value}
-        onChangeText={text => change(text)}
+        onChangeText={change}
         keyboardType={keyboardType}
         secureTextEntry={type === 'password'}
       />

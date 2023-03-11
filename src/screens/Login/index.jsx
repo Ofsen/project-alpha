@@ -4,15 +4,14 @@ import LoginForm from '../../components/Forms/LoginForm';
 
 const Container = styled.View`
   flex: 1;
-  background: #010814;
   align-items: center;
   justify-content: center;
 `;
 
 const TextHeader = styled.Text`
-  font-size: 16px;
-  color: #fff;
-  font-weight: bold;
+  font-size: 32px;
+  color: black;
+  font-weight: 900;
 `;
 
 const Login = () => {
