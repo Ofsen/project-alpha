@@ -62,4 +62,6 @@ export const Routes = () => {
 
 const GlobalSafeArea = styled.SafeAreaView`
   flex: 1;
+
+  background-color: ${({theme}) => theme.background};
 `;

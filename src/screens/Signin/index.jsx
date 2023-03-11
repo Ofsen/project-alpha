@@ -21,6 +21,6 @@ const Container = styled.View`
 
 const TextHeader = styled.Text`
   font-size: 32px;
-  color: black;
   font-weight: 900;
+  color: ${({theme}) => theme.color};
 `;
