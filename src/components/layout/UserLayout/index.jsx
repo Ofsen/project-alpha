@@ -1,26 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoginForm from '../../components/Forms/LoginForm';
 
-const Login = () => {
+export const UserLayout = props => {
+  const {children, title} = props;
   return (
     <Container>
-      <TextHeader>Log in</TextHeader>
-      <LoginForm />
+      <TextHeader>{title}</TextHeader>
+      <ContentContainer>{children}</ContentContainer>
     </Container>
   );
 };
 
-export default Login;
-
 const Container = styled.View`
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  padding: 16px;
 `;
 
 const TextHeader = styled.Text`
   font-size: 32px;
   font-weight: 900;
   color: ${({theme}) => theme.color};
+`;
+
+const ContentContainer = styled.View`
+  flex: 1;
+  margin-top: 16px;
+  gap: 16px;
 `;

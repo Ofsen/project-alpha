@@ -13,7 +13,15 @@ const Input = styled.TextInput`
 `;
 
 const TextField = props => {
-  const {label, placeholder, value, type, change, keyboardType} = props;
+  const {
+    label,
+    placeholder,
+    value,
+    type,
+    change,
+    keyboardType,
+    disabled = false,
+  } = props;
 
   return (
     <FieldContainer>
@@ -24,6 +32,7 @@ const TextField = props => {
         onChangeText={change}
         keyboardType={keyboardType}
         secureTextEntry={type === 'password'}
+        readOnly={disabled}
       />
     </FieldContainer>
   );

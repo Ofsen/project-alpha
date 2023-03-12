@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import SignInForm from '../../components/Forms/SignInForm';
+import LoginForm from '../../../components/Forms/LoginForm';
 
-const Signin = () => {
+const Login = () => {
   return (
     <Container>
-      <TextHeader>Sign In</TextHeader>
-      <SignInForm />
+      <TextHeader>Log in</TextHeader>
+      <LoginForm />
     </Container>
   );
 };
 
-export default Signin;
+export default Login;
 
 const Container = styled.View`
   flex: 1;

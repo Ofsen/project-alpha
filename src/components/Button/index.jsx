@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Touchable = styled.TouchableOpacity`
+const Touchable = styled.Pressable`
   width: 100%;
   padding: 14px 20px;
-  background-color: #0e4faf;
+  background-color: ${props => props.theme[props.variant]};
 `;
 
 const Label = styled.Text`
@@ -15,10 +15,10 @@ const Label = styled.Text`
 `;
 
 export const Button = props => {
-  const {label, pressHandler} = props;
+  const {label, pressHandler, variant = 'primary'} = props;
 
   return (
-    <Touchable onPress={pressHandler}>
+    <Touchable onPress={pressHandler} variant={variant}>
       <Label>{label}</Label>
     </Touchable>
   );

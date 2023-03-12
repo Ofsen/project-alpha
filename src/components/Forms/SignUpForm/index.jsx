@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import {Button} from '../../Button';
 import TextField from '../TextField';
 import {useNavigation} from '@react-navigation/native';
-import {signInWithEmailAndPassword} from 'firebase/auth';
-import {auth} from '../../../config/firebase';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {useAuth} from '../../../contexts/authContext';
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const navigation = useNavigation();
+  const {Signup} = useAuth();
   const [form, setForm] = React.useState({email: '', password: '', error: ''});
 
   const handleLogin = async () => {
@@ -18,9 +19,8 @@ const LoginForm = () => {
 
     setForm(prev => ({...prev, error: ''}));
     try {
-      await signInWithEmailAndPassword(auth, form.email, form.password);
+      await Signup(form.email, form.password);
     } catch (error) {
-      console.log(error);
       setForm(prev => ({
         ...prev,
         error: error.message,
@@ -50,16 +50,16 @@ const LoginForm = () => {
         value={form.password}
       />
       <View style={{marginTop: 12}}>
-        <Button label="Log in" pressHandler={handleLogin} />
+        <Button label="Sign up" pressHandler={handleLogin} />
       </View>
-      <Pressable onPress={() => navigation.navigate('Signup')}>
-        <LinkText> Not signed up yet ? sign up</LinkText>
+      <Pressable onPress={() => navigation.navigate('Login')}>
+        <LinkText>Already signed up ? log in</LinkText>
       </Pressable>
     </FormContainer>
   );
 };
 
-export default LoginForm;
+export default SignUpForm;
 
 const FormContainer = styled.View`
   width: 70%;
