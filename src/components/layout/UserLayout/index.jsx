@@ -13,10 +13,10 @@ export const UserLayout = props => {
 
 const Container = styled.View`
   flex: 1;
-  padding: 16px;
 `;
 
 const TextHeader = styled.Text`
+  padding: 16px;
   font-size: 32px;
   font-weight: 900;
   color: ${({theme}) => theme.color};
@@ -24,6 +24,5 @@ const TextHeader = styled.Text`
 
 const ContentContainer = styled.View`
   flex: 1;
-  margin-top: 16px;
   gap: 16px;
 `;
