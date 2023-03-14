@@ -1,11 +1,17 @@
+import {useNavigation} from '@react-navigation/native';
 import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 
 export const Event = props => {
-  const {title, leadText, dateStart, dateEnd, coverUrl, tags} = props;
+  const {id, title, leadText, dateStart, dateEnd, coverUrl, tags} = props;
+  const navigation = useNavigation();
+
   return (
-    <ViewContainer>
+    <PressableContainer
+      onPress={() =>
+        navigation.navigate('EventSingle', {eventId: id, title: title})
+      }>
       <HeaderContainer>
         <CoverImage source={{uri: coverUrl, height: 200}} />
       </HeaderContainer>
@@ -19,11 +25,11 @@ export const Event = props => {
           </Date>
         </DateContainer>
       </ContentContainer>
-    </ViewContainer>
+    </PressableContainer>
   );
 };
 
-const ViewContainer = styled.View`
+const PressableContainer = styled.Pressable`
   background-color: white;
   width: 100%;
   margin-bottom: 16px;

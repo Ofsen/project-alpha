@@ -24,5 +24,6 @@ const TextHeader = styled.Text`
 
 const ContentContainer = styled.View`
   flex: 1;
+  margin-top: 8px;
   gap: 16px;
 `;

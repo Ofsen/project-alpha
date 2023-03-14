@@ -43,17 +43,17 @@ const SignUpForm = () => {
         value={form.email}
       />
       <TextField
-        label="Password"
+        label="Mot de passe"
         placeholder="***"
         type="password"
         change={text => setForm(prev => ({...prev, password: text}))}
         value={form.password}
       />
       <View style={{marginTop: 12}}>
-        <Button label="Sign up" pressHandler={handleLogin} />
+        <Button label="S'inscrire" pressHandler={handleLogin} />
       </View>
       <Pressable onPress={() => navigation.navigate('Login')}>
-        <LinkText>Already signed up ? log in</LinkText>
+        <LinkText>Déja inscrit ? se connecter</LinkText>
       </Pressable>
     </FormContainer>
   );

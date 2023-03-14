@@ -1,6 +1,6 @@
 import React from 'react';
-import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useTheme} from 'styled-components';
 // Screens
 import Login from './Login';
 import Signup from './Signup';
@@ -9,8 +9,19 @@ import Welcome from './Welcome';
 const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
+  const theme = useTheme();
   return (
-    <Stack.Navigator initialRouteName="Welcome">
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.statusBar,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+      initialRouteName="Welcome">
       <Stack.Screen
         options={{
           headerShown: false,
@@ -21,7 +32,7 @@ const AuthStack = () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen
         options={{
-          title: 'Sign Up',
+          title: "S'inscrire",
         }}
         name="Signup"
         component={Signup}

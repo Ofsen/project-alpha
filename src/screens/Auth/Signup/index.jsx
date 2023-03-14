@@ -5,7 +5,7 @@ import SignUpForm from '../../../components/Forms/SignUpForm';
 const Signup = () => {
   return (
     <Container>
-      <TextHeader>Sign Up</TextHeader>
+      <TextHeader>S'inscrire</TextHeader>
       <SignUpForm />
     </Container>
   );

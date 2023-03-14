@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import styled, {useTheme} from 'styled-components';
 import {ActivityIndicator, FlatList, Text} from 'react-native';
-import {UserLayout} from '../../../components/layout/UserLayout';
+import {UserLayout} from '../../../../components/layout/UserLayout';
 import {useToast} from 'react-native-toast-notifications';
-import {getPaginatedEvents} from '../../../services/events';
-import {Event} from '../../../components/Event';
+import {getPaginatedEvents} from '../../../../services/events';
+import {Event} from '../../../../components/Event';
 
-const Home = () => {
+const EventList = () => {
   const toast = useToast();
   const theme = useTheme();
   const [data, setData] = useState([]);
@@ -23,7 +23,7 @@ const Home = () => {
         setData(prev => [...prev, ...res.data.records]);
       }
     } catch (err) {
-      toast.show(err, {type: 'warning'});
+      toast.show(err.message, {type: 'warning'});
     }
     if (page === 0) {
       setLoading(false);
@@ -39,7 +39,7 @@ const Home = () => {
         setData(res.data.records);
       }
     } catch (err) {
-      toast.show(err, {type: 'warning'});
+      toast.show(err.message, {type: 'warning'});
     }
     setRefreshing(false);
   };
@@ -50,7 +50,7 @@ const Home = () => {
   }, [page]);
 
   return (
-    <UserLayout title="Home">
+    <UserLayout title="Accueil">
       {loading ? (
         <Centered>
           <ActivityIndicator size="large" color={theme.primary} />
@@ -61,6 +61,7 @@ const Home = () => {
           initialNumToRender={size}
           renderItem={({item}) => (
             <Event
+              id={item.record.id}
               title={item.record.fields.title}
               leadText={item.record.fields.lead_text}
               dateStart={item.record.fields.date_start}
@@ -101,7 +102,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default EventList;
 
 const List = styled.FlatList`
   padding: 0 16px;

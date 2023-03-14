@@ -5,18 +5,19 @@ import {Button} from '../../../components/Button';
 const Welcome = ({navigation}) => {
   return (
     <Container>
-      <TextHeader>Welcome!</TextHeader>
+      <TextHeader>Bienvenue!</TextHeader>
       <CenteredText>
-        Log in or sign up and get access to the best plans on what to do in
-        Paris!
+        Connectez-vous ou inscrivez-vous et accédez aux meilleurs plans sur ce
+        qu'il faut faire dans Paris!
       </CenteredText>
       <ButtonContainer>
         <Button
-          label="Log In"
+          label="Se connecter"
           pressHandler={() => navigation.navigate('Login')}
         />
         <Button
-          label="Sign Up"
+          outline
+          label="S'inscrire"
           pressHandler={() => navigation.navigate('Signup')}
         />
       </ButtonContainer>

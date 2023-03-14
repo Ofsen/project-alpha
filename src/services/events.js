@@ -10,3 +10,11 @@ export const getPaginatedEvents = (limit = 20, offset) => {
     },
   });
 };
+
+export const getSingleEvent = eventId => {
+  return axios.get(`${DATA_API}/${eventId}`, {
+    params: {
+      timezone: 'Europe/Paris',
+    },
+  });
+};

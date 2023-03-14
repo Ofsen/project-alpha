@@ -3,8 +3,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icons from 'react-native-vector-icons/Ionicons';
 import {useTheme} from 'styled-components';
 // Screens
-import Home from './Home';
 import Profile from './Profile';
+import HomeStack from './Home/HomeStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +29,7 @@ const UserStack = () => {
         headerShown: false,
         tabBarShowLabel: false,
       })}>
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

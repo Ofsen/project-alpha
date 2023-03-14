@@ -5,7 +5,7 @@ import LoginForm from '../../../components/Forms/LoginForm';
 const Login = () => {
   return (
     <Container>
-      <TextHeader>Log in</TextHeader>
+      <TextHeader>Se connecter</TextHeader>
       <LoginForm />
     </Container>
   );
