@@ -24,7 +24,7 @@ const EventSingle = props => {
     try {
       const res = await getSingleEvent(route.params.eventId);
       if (res.status === 200) {
-        setData(prev => res.data.record);
+        setData(res.data.record);
       }
     } catch (err) {
       toast.show(err.message, {type: 'warning'});

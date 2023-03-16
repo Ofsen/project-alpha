@@ -5,6 +5,7 @@ import {UserLayout} from '../../../../components/layout/UserLayout';
 import {useToast} from 'react-native-toast-notifications';
 import {getPaginatedEvents} from '../../../../services/events';
 import {Event} from '../../../../components/Event';
+import {useFocusEffect} from '@react-navigation/native';
 
 const EventList = () => {
   const toast = useToast();
@@ -25,27 +26,25 @@ const EventList = () => {
     } catch (err) {
       toast.show(err.message, {type: 'warning'});
     }
-    if (page === 0) {
-      setLoading(false);
-    }
+    if (page === 0) setLoading(false);
   };
 
   const refreshData = async () => {
     setRefreshing(true);
-    setPage(0);
-    try {
-      const res = await getPaginatedEvents(size, 0);
-      if (res.status === 200) {
-        setData(res.data.records);
-      }
-    } catch (err) {
-      toast.show(err.message, {type: 'warning'});
-    }
+    setData([]);
     setRefreshing(false);
+    setPage(0);
   };
 
-  useEffect(() => {
-    if (refreshing) return;
+  useFocusEffect(
+    React.useCallback(() => {
+      setData([]);
+      setLoading(true);
+      setPage(0);
+    }, []),
+  );
+
+  React.useEffect(() => {
     fetchData();
   }, [page]);
 
@@ -82,7 +81,7 @@ const EventList = () => {
           ListEmptyComponent={() =>
             !refreshing && (
               <Centered>
-                <Text>No events found</Text>
+                <Text>Aucun evenement trouvé</Text>
               </Centered>
             )
           }

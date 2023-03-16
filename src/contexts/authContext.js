@@ -1,11 +1,6 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
-import {auth} from '../config/firebase';
+import auth from '@react-native-firebase/auth';
+import {useToast} from 'react-native-toast-notifications';
 
 const authContextInitialValues = {
   currentUser: undefined,
@@ -22,11 +17,11 @@ export const useAuth = () => {
 
 export function AuthProvider(props) {
   const {children} = props;
+  const toast = useToast();
   const [currentUserState, setCurrentUserState] = useState();
 
   useEffect(() => {
-    const unsubscribeFromAuthStateChanged = onAuthStateChanged(
-      auth,
+    const unsubscribeFromAuthStateChanged = auth().onAuthStateChanged(
       loggedUser => {
         if (loggedUser) {
           setCurrentUserState(loggedUser);
@@ -40,12 +35,19 @@ export function AuthProvider(props) {
   }, []);
 
   const Signup = async (email, password) =>
-    await createUserWithEmailAndPassword(auth, email, password);
+    await auth().createUserWithEmailAndPassword(email, password);
 
   const Login = async (email, password) =>
-    await signInWithEmailAndPassword(auth, email, password);
+    await auth().signInWithEmailAndPassword(email, password);
 
-  const Logout = () => signOut(auth);
+  const Logout = async () => {
+    console.log('gu');
+    try {
+      await auth().signOut();
+    } catch (err) {
+      toast.show(err.message, {type: 'warning'});
+    }
+  };
 
   const value = {
     currentUser: currentUserState,

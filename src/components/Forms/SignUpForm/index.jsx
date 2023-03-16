@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import {Button} from '../../Button';
 import TextField from '../TextField';
 import {useNavigation} from '@react-navigation/native';
-import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {useAuth} from '../../../contexts/authContext';
 
 const SignUpForm = () => {

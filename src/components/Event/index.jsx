@@ -2,10 +2,51 @@ import {useNavigation} from '@react-navigation/native';
 import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {useToast} from 'react-native-toast-notifications';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Event = props => {
   const {id, title, leadText, dateStart, dateEnd, coverUrl, tags} = props;
   const navigation = useNavigation();
+  const toast = useToast();
+  const [favorite, setFavorite] = React.useState(false);
+
+  const fetchFavorited = async () => {
+    try {
+      const localData = await AsyncStorage.getItem('favorites');
+      const parsedData = JSON.parse(localData || '[]');
+      const isFavorited = parsedData.find(item => item.eventId === id);
+      setFavorite(isFavorited);
+    } catch (err) {
+      toast.show(err.message, {type: 'warning'});
+    }
+  };
+
+  const toggleFavorite = async () => {
+    try {
+      const localData = await AsyncStorage.getItem('favorites');
+      const parsedData = JSON.parse(localData || '[]');
+      const isFavorited = parsedData.find(item => item.eventId === id);
+      if (isFavorited) {
+        const filteredData = parsedData.filter(item => item.eventId !== id);
+        await AsyncStorage.setItem('favorites', JSON.stringify(filteredData));
+        setFavorite(false);
+      } else {
+        await AsyncStorage.setItem(
+          'favorites',
+          JSON.stringify([...parsedData, {eventId: id, title: title}]),
+        );
+        setFavorite(true);
+      }
+    } catch (err) {
+      toast.show(err.message, {type: 'warning'});
+    }
+  };
+
+  React.useEffect(() => {
+    fetchFavorited();
+  }, []);
 
   return (
     <PressableContainer
@@ -14,6 +55,13 @@ export const Event = props => {
       }>
       <HeaderContainer>
         <CoverImage source={{uri: coverUrl, height: 200}} />
+        <FavoriteButton onPress={() => toggleFavorite()}>
+          <Icon
+            name={favorite ? 'ios-heart' : 'ios-heart-outline'}
+            size={28}
+            color={favorite ? 'red' : 'white'}
+          />
+        </FavoriteButton>
       </HeaderContainer>
       <ContentContainer>
         <Title>{title}</Title>
@@ -38,12 +86,22 @@ const PressableContainer = styled.Pressable`
 const HeaderContainer = styled.View`
   width: 100%;
   height: 200px;
+  position: relative;
 `;
 
 const CoverImage = styled.Image`
   width: 100%;
   height: 200px;
   object-fit: cover;
+`;
+
+const FavoriteButton = styled.Pressable`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(0, 0, 0, 0.35);
+  padding: 9px 8px 7px 8px;
+  border-radius: 100px;
 `;
 
 const ContentContainer = styled.View`

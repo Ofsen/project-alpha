@@ -5,6 +5,7 @@ import {useTheme} from 'styled-components';
 // Screens
 import Profile from './Profile';
 import HomeStack from './Home/HomeStack';
+import Favorites from './Favorites';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,10 +17,18 @@ const UserStack = () => {
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
 
-          if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Profile') {
-            iconName = focused ? 'person' : 'person-outline';
+          switch (route.name) {
+            case 'Home':
+              iconName = focused ? 'home' : 'home-outline';
+              break;
+            case 'Favorites':
+              iconName = focused ? 'ios-heart' : 'ios-heart-outline';
+              break;
+            case 'Profile':
+              iconName = focused ? 'person' : 'person-outline';
+              break;
+            default:
+              break;
           }
 
           return <Icons name={iconName} size={size} color={color} />;
@@ -30,6 +39,7 @@ const UserStack = () => {
         tabBarShowLabel: false,
       })}>
       <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Favorites" component={Favorites} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import {Button} from '../../Button';
 import TextField from '../TextField';
 import {useNavigation} from '@react-navigation/native';
-import {signInWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../../../config/firebase';
+import {useAuth} from '../../../contexts/authContext';
 
 const LoginForm = () => {
   const navigation = useNavigation();
+  const {Login} = useAuth();
   const [form, setForm] = React.useState({email: '', password: '', error: ''});
 
   const handleLogin = async () => {
@@ -18,7 +19,7 @@ const LoginForm = () => {
 
     setForm(prev => ({...prev, error: ''}));
     try {
-      await signInWithEmailAndPassword(auth, form.email, form.password);
+      await Login(form.email, form.password);
     } catch (error) {
       console.log(error);
       setForm(prev => ({
