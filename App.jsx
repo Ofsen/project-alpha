@@ -7,6 +7,7 @@ import {darkTheme, lightTheme} from './src/config/theme';
 import {ToastProvider} from 'react-native-toast-notifications';
 import Icon from 'react-native-vector-icons/Ionicons';
 import notifee, {EventType} from '@notifee/react-native';
+import 'react-native-gesture-handler';
 
 const App = () => {
   // TODO: theme context
