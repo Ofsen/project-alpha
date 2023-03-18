@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled, {useTheme} from 'styled-components';
-import {ActivityIndicator, FlatList, Text} from 'react-native';
+import {ActivityIndicator, FlatList} from 'react-native';
 import {UserLayout} from '../../../../components/layout/UserLayout';
 import {useToast} from 'react-native-toast-notifications';
 import {getPaginatedEvents} from '../../../../services/events';
@@ -111,4 +111,8 @@ const Centered = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+`;
+
+const Text = styled.Text`
+  color: ${({theme}) => theme.color};
 `;

@@ -41,7 +41,6 @@ export function AuthProvider(props) {
     await auth().signInWithEmailAndPassword(email, password);
 
   const Logout = async () => {
-    console.log('gu');
     try {
       await auth().signOut();
     } catch (err) {

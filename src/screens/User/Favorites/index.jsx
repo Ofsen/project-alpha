@@ -1,6 +1,6 @@
 import React from 'react';
 import {UserLayout} from '../../../components/layout/UserLayout';
-import {ActivityIndicator, Text} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useToast} from 'react-native-toast-notifications';
 import styled, {useTheme} from 'styled-components';
@@ -102,6 +102,10 @@ const Centered = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+`;
+
+const Text = styled.Text`
+  color: ${({theme}) => theme.color};
 `;
 
 const PressableContainer = styled.Pressable`

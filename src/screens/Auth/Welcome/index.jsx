@@ -43,6 +43,7 @@ const TextHeader = styled.Text`
 const CenteredText = styled.Text`
   text-align: center;
   padding: 0 32px;
+  color: ${({theme}) => theme.color};
 `;
 
 const ButtonContainer = styled.View`
